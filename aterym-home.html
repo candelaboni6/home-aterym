@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aterym Alta Gracia · Nefrología y Hemodiálisis</title>
+<meta name="description" content="Centro de nefrología y hemodiálisis en Alta Gracia, Córdoba. Único centro de diálisis de la provincia acreditado en calidad y seguridad del paciente por el ITAES.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ec; --bg-deep:#ebe6de; --bg-card:#efeae2;
+  --ink:#1a2332; --ink-soft:#4a5668; --muted:#8a8578;
+  --accent:#3a5a7c; --accent-deep:#2a4560; --accent-tint:#e4ecf3;
+  --line:rgba(26,35,50,0.12); --line-soft:rgba(26,35,50,0.07);
+  --aterym:#00aeea;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg); color:var(--ink); font-weight:300; line-height:1.6;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  position:relative; overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* Atmósfera */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(58,90,124,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 85% 80%, rgba(58,90,124,0.03) 0%, transparent 50%);
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity:.06; mix-blend-mode:multiply;
+}
+
+/* === NAV === */
+.nav{position:sticky;top:0;z-index:100;background:rgba(26,35,50,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:1.1rem clamp(1.25rem,4vw,2.5rem);display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.nav-logo{height:38px;width:auto}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:rgba(244,241,236,.75);font-size:.82rem;font-weight:400;letter-spacing:.04em;transition:color .25s}
+.nav-links a:hover{color:var(--bg)}
+.nav-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;background:var(--accent);color:var(--bg)!important;border-radius:2px;font-weight:500!important;font-size:.78rem!important;letter-spacing:.06em!important;text-transform:uppercase;transition:background .25s}
+.nav-cta:hover{background:var(--accent-deep)}
+.nav-toggle{display:none;background:transparent;border:none;color:var(--bg);cursor:pointer;padding:.5rem}
+.nav-toggle svg{width:22px;height:22px}
+@media (max-width:780px){
+  .nav-links{display:none}
+  .nav-links.mobile-show{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--ink);padding:1.25rem;gap:1rem;border-bottom:1px solid rgba(255,255,255,.08);align-items:flex-start}
+  .nav-toggle{display:block}
+}
+
+/* === HERO === */
+.hero{position:relative;z-index:2;min-height:90vh;min-height:90dvh;display:grid;align-items:center;padding:clamp(3rem,8vw,6rem) clamp(1.25rem,4vw,2.5rem);overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1;background:url('https://aterym.com/wp-content/uploads/2026/03/Jornada-de-Calidad-Aterym-Alta-Gracia-58.webp') center/cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,35,50,.55) 0%,rgba(26,35,50,.82) 60%,rgba(26,35,50,.94) 100%)}
+.hero-inner{max-width:1280px;margin:0 auto;width:100%;position:relative;z-index:1;color:var(--bg)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.75rem;opacity:.9;animation:fadeDown .9s ease-out both}
+.hero-eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--bg);position:relative}
+.hero-eyebrow .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--bg);animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.5);opacity:0}}
+.hero h1{font-weight:200;font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.035em;line-height:1.02;margin-bottom:1.5rem;max-width:22ch;animation:fadeUp 1s ease-out .2s both}
+.hero h1 strong{font-weight:500;display:block;position:relative}
+.hero h1 strong::after{content:"";display:block;width:60px;height:2px;background:var(--bg);opacity:.5;margin-top:.6rem}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.15rem);font-weight:300;letter-spacing:.01em;margin-bottom:2.5rem;opacity:.85;max-width:48ch;line-height:1.65;animation:fadeUp 1s ease-out .35s both}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 1s ease-out .5s both}
+
+/* === BOTONES === */
+.btn{display:inline-flex;align-items:center;gap:.75rem;padding:1rem 1.75rem;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:all .3s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;cursor:pointer;border:none;font-family:inherit}
+.btn svg{width:15px;height:15px;transition:transform .3s}
+.btn:hover svg{transform:translateX(4px)}
+.btn-primary{background:var(--bg);color:var(--ink)}
+.btn-primary::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1}
+.btn-primary:hover{color:var(--bg)}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-ghost{background:transparent;color:var(--bg);border:1px solid rgba(244,241,236,.35)}
+.btn-ghost:hover{border-color:var(--bg);background:rgba(244,241,236,.08)}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.btn-dark span,.btn-dark svg{position:relative;z-index:1}
+.btn-dark:hover::before{transform:translateX(0)}
+.btn-dark:hover{transform:translateY(-2px)}
+.btn-light{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-light:hover{background:rgba(26,35,50,.04);border-color:var(--ink)}
+.btn-light svg{stroke:var(--ink)}
+
+/* === BANNER JORNADA === */
+.banner-jornada{position:relative;z-index:2;background:var(--ink);color:var(--bg);overflow:hidden;border-bottom:1px solid rgba(244,241,236,.08)}
+.banner-jornada-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;padding:1.25rem clamp(1.25rem,4vw,2.5rem)}
+.banner-jornada .badge-date{display:inline-flex;align-items:center;gap:.6rem;background:var(--accent);color:var(--bg);padding:.5rem .9rem;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border-radius:2px;white-space:nowrap}
+.banner-jornada .badge-date .pulse{width:6px;height:6px;border-radius:50%;background:var(--bg)}
+.banner-jornada-text{font-size:.95rem;font-weight:300;opacity:.85;line-height:1.5}
+.banner-jornada-text strong{font-weight:500;color:var(--bg);opacity:1}
+.banner-jornada-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);opacity:.75;white-space:nowrap;transition:opacity .25s}
+.banner-jornada-link:hover{opacity:1}
+.banner-jornada-link svg{width:14px;height:14px;transition:transform .25s}
+.banner-jornada-link:hover svg{transform:translateX(3px)}
+@media (max-width:900px){
+  .banner-jornada-grid{grid-template-columns:1fr;gap:1rem;text-align:center;justify-items:center;padding:1.5rem 1.25rem}
+}
+
+/* === SECTION === */
+.section{position:relative;z-index:2;padding:clamp(4rem,10vw,7rem) clamp(1.25rem,4vw,2.5rem)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-inner.wide{max-width:1280px}
+.section-header{text-align:center;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-eyebrow{display:inline-block;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-weight:200;font-size:clamp(1.9rem,4.2vw,3rem);color:var(--ink);letter-spacing:-.03em;line-height:1.1;max-width:24ch;margin:0 auto}
+.section-title strong{font-weight:500;color:var(--accent)}
+.section-sub{font-size:1rem;color:var(--ink-soft);max-width:50ch;margin:1.25rem auto 0;font-weight:300;line-height:1.65}
+.section.alt{background:var(--bg-deep);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.section.dark{background:var(--ink);color:var(--bg)}
+.section.dark .section-title{color:var(--bg)}
+.section.dark .section-title strong{color:var(--accent-tint)}
+.section.dark .section-eyebrow{color:var(--accent-tint);opacity:.85}
+.section.dark .section-sub{color:rgba(244,241,236,.75)}
+
+/* === BIENVENIDA === */
+.welcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center;margin-top:1rem}
+.welcome-text .quote{font-weight:200;font-size:clamp(1.4rem,2.6vw,2rem);color:var(--ink);letter-spacing:-.02em;line-height:1.3;margin-bottom:1.5rem;font-style:italic;position:relative;padding-left:1.5rem;border-left:2px solid var(--accent)}
+.welcome-text .quote em{font-style:italic;color:var(--accent);font-weight:300}
+.welcome-text > p{font-size:1rem;color:var(--ink-soft);margin-bottom:1.25rem;line-height:1.75;font-weight:300}
+.welcome-images{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.welcome-images img{aspect-ratio:3/4;object-fit:cover;width:100%;height:100%;border-radius:2px;filter:saturate(.9)}
+.welcome-images img:nth-child(2){margin-top:2.5rem}
+@media (max-width:780px){
+  .welcome-grid{grid-template-columns:1fr;gap:2.5rem}
+  .welcome-images img:nth-child(2){margin-top:0}
+}
+
+/* === TRATAMIENTOS === */
+.treat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.treat-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:2px;padding:clamp(2rem,4vw,3rem);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:1rem;min-height:280px;position:relative;overflow:hidden;transition:all .3s}
+.treat-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.treat-card:hover{border-color:var(--accent);transform:translateY(-4px);background:var(--bg-card)}
+.treat-card:hover::before{transform:scaleY(1)}
+.treat-num{font-weight:200;font-size:3rem;line-height:1;color:var(--accent);letter-spacing:-.04em}
+.treat-card h3{font-size:1.5rem;font-weight:500;color:var(--ink);letter-spacing:-.02em;margin-bottom:.25rem}
+.treat-card p{font-size:.95rem;color:var(--ink-soft);font-weight:300;line-height:1.65;margin-bottom:1.5rem;flex-grow:1}
+.treat-card .more{font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-top:auto;display:inline-flex;align-items:center;gap:.5rem;transition:gap .25s}
+.treat-card:hover .more{gap:.85rem}
+@media (max-width:780px){.treat-grid{grid-template-columns:1fr}}
+
+/* === ACREDITACIÓN === */
+.acred{position:relative;z-index:2;background:var(--ink);color:var(--bg);padding:clamp(4rem,8vw,6rem) clamp(1.25rem,4vw,2.5rem);overflow:hidden}
+.acred::before{content:"ITAES";position:absolute;font-weight:200;font-size:28rem;line-height:.8;right:-3rem;bottom:-5rem;color:rgba(244,241,236,.04);pointer-events:none;letter-spacing:-.05em}
+.acred-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(2.5rem,5vw,4rem);align-items:center;position:relative;z-index:1}
+.acred-eyebrow{display:inline-block;font-size:.72rem;font-weight:600;color:var(--accent-tint);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.25rem;opacity:.85}
+.acred h2{font-weight:200;font-size:clamp(1.8rem,4vw,2.75rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem;max-width:22ch}
+.acred h2 em{font-style:italic;font-weight:300;color:var(--accent-tint)}
+.acred p{font-weight:300;line-height:1.75;opacity:.8;margin-bottom:1.5rem;max-width:50ch}
+.acred-badge{background:rgba(244,241,236,.06);border:1px solid rgba(244,241,236,.12);border-radius:2px;padding:2.5rem 2rem;text-align:center;backdrop-filter:blur(4px)}
+.acred-badge img{height:80px;width:auto;margin:0 auto 1.5rem;filter:brightness(0) invert(1);opacity:.95}
+.acred-badge .vigencia{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-bottom:.5rem}
+.acred-badge strong{display:block;font-size:1.05rem;font-weight:500;letter-spacing:.02em}
+@media (max-width:900px){.acred-grid{grid-template-columns:1fr}}
+
+/* === METAS === */
+.metas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.meta-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:2px;padding:2rem 1.75rem;display:flex;flex-direction:column;gap:1rem;transition:all .3s;position:relative;overflow:hidden}
+.meta-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.meta-card:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg-card)}
+.meta-card:hover::before{transform:scaleY(1)}
+.meta-icon{width:56px;height:56px;background:var(--accent-tint);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
+.meta-icon svg{width:28px;height:28px}
+.meta-num{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.meta-card h4{font-size:1.05rem;font-weight:500;color:var(--ink);line-height:1.35;letter-spacing:-.005em}
+@media (max-width:900px){.metas-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.metas-grid{grid-template-columns:1fr}}
+
+/* === EQUIPO === */
+.team-intro{text-align:center;margin-bottom:3rem}
+.team-intro .number{font-weight:200;font-size:clamp(4rem,10vw,7rem);color:var(--accent);letter-spacing:-.04em;line-height:1;margin-bottom:.5rem;display:block}
+.team-intro p{font-size:1.05rem;color:var(--ink-soft);font-weight:300;max-width:38ch;margin:0 auto}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:780px;margin:0 auto 3rem}
+.team-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:2px;overflow:hidden;transition:all .3s}
+.team-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.team-photo{aspect-ratio:1/1;background:var(--bg-deep);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.team-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+.team-info{padding:1.75rem}
+.team-info .role{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:block}
+.team-info h4{font-size:1.25rem;font-weight:500;color:var(--ink);letter-spacing:-.015em;line-height:1.25}
+.team-cta{text-align:center}
+@media (max-width:640px){.team-grid{grid-template-columns:1fr;gap:1.25rem}}
+
+/* === DIÁLISIS VACACIONES === */
+.vacaciones{position:relative;z-index:2;padding:0;overflow:hidden}
+.vacaciones-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:520px}
+.vacaciones-image{position:relative;overflow:hidden;min-height:380px}
+.vacaciones-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.95) brightness(.97);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.vacaciones:hover .vacaciones-image img{transform:scale(1.04)}
+.vacaciones-image::after{content:"";position:absolute;inset:0;background:linear-gradient(45deg,rgba(26,35,50,.15) 0%,transparent 50%)}
+.vacaciones-content{background:var(--ink);color:var(--bg);padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);display:flex;flex-direction:column;justify-content:center}
+.vacaciones-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-tint);opacity:.85;margin-bottom:1.25rem;display:block}
+.vacaciones h2{font-weight:200;font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem}
+.vacaciones h2 strong{font-weight:500;color:var(--accent-tint);display:block}
+.vacaciones p{font-weight:300;line-height:1.7;opacity:.85;margin-bottom:2rem;max-width:42ch;font-size:.95rem}
+.vacaciones .btn-ghost{align-self:flex-start}
+@media (max-width:900px){
+  .vacaciones-grid{grid-template-columns:1fr;min-height:auto}
+  .vacaciones-image{min-height:300px;aspect-ratio:16/10}
+}
+
+/* === NOTICIAS === */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+.news-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:all .3s}
+.news-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.news-image{aspect-ratio:16/10;overflow:hidden}
+.news-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1);filter:saturate(.9)}
+.news-card:hover .news-image img{transform:scale(1.05)}
+.news-body{padding:2rem;display:flex;flex-direction:column;flex-grow:1;gap:1rem}
+.news-body .date{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.news-body h3{font-size:1.4rem;font-weight:500;color:var(--ink);line-height:1.25;letter-spacing:-.015em}
+.news-body p{font-size:.92rem;color:var(--ink-soft);font-weight:300;line-height:1.6;flex-grow:1}
+.news-link{font-size:.78rem;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;transition:gap .25s;margin-top:auto}
+.news-card:hover .news-link{gap:.85rem}
+.news-link svg{width:14px;height:14px}
+@media (max-width:780px){.news-grid{grid-template-columns:1fr}}
+
+/* === CTA contacto === */
+.cta-final{text-align:center;padding:clamp(4rem,8vw,6rem) clamp(1.25rem,4vw,2.5rem);position:relative;z-index:2}
+.cta-final .section-title{margin-bottom:1.5rem}
+.cta-final .section-sub{margin-bottom:2.5rem}
+.cta-final-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* === FOOTER === */
+footer{background:var(--ink);color:var(--bg);padding:clamp(3rem,6vw,5rem) clamp(1.25rem,4vw,2.5rem) 2rem;position:relative;z-index:2}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(244,241,236,.12)}
+.footer-logo img{height:42px;width:auto;margin-bottom:1.25rem}
+.footer-logo p{font-size:.88rem;opacity:.65;line-height:1.6;font-weight:300;max-width:32ch}
+.footer-col h4{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--bg);opacity:.5;margin-bottom:1.25rem}
+.footer-col ul{display:flex;flex-direction:column;gap:.6rem}
+.footer-col a,.footer-col span{color:var(--bg);font-size:.88rem;opacity:.8;font-weight:300;transition:opacity .25s}
+.footer-col a:hover{opacity:1}
+.footer-itaes{display:flex;align-items:center;gap:1rem;padding:1.25rem 0;margin-top:2rem;border-top:1px solid rgba(244,241,236,.08);border-bottom:1px solid rgba(244,241,236,.08)}
+.footer-itaes img{height:48px;width:auto;filter:brightness(0) invert(1);opacity:.85}
+.footer-itaes p{font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;font-size:.78rem;opacity:.5;flex-wrap:wrap;gap:1rem}
+.footer-socials{display:flex;gap:1.25rem}
+.footer-socials a{opacity:.7;transition:opacity .25s}
+.footer-socials a:hover{opacity:1}
+.footer-socials svg{width:18px;height:18px}
+@media (max-width:780px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:520px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-itaes{flex-direction:column;text-align:center;align-items:center}
+}
+
+/* === ANIMS === */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}
+.fade-in.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* === RESPONSIVE GENERAL === */
+@media (max-width:640px){
+  .nav-inner{padding:.85rem 1.25rem}
+  .nav-logo{height:32px}
+  .hero{min-height:80vh;padding:5rem 1.25rem 4rem}
+  .hero h1{font-size:clamp(2.2rem,9vw,3.5rem)}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn{justify-content:center}
+  .section{padding:3.5rem 1.25rem}
+  .acred::before{font-size:14rem;right:-1rem;bottom:-2rem}
+  .cta-final-actions{flex-direction:column;align-items:stretch}
+  .cta-final-actions .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" aria-label="Aterym Alta Gracia"><img class="nav-logo" src="https://aterym.com/wp-content/uploads/2025/12/Logo-blanco-Aterym.webp" alt="Aterym Alta Gracia"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#bienvenidos">Institución</a></li>
+      <li><a href="#tratamientos">Tratamientos</a></li>
+      <li><a href="#calidad">Calidad</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#noticias">Novedades</a></li>
+      <li><a class="nav-cta" href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('mobile-show')" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="pulse"></span><span>Nefrología y Hemodiálisis · Alta Gracia</span></div>
+    <h1>Experiencia, calidad y <strong>compromiso</strong></h1>
+    <p class="hero-sub">En el cuidado de tu salud renal. Centro de diálisis acreditado en calidad y seguridad del paciente, con un equipo interdisciplinario que pone a las personas en el centro.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#bienvenidos">
+        <span>Conocenos</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#contacto">
+        <span>Solicitar turno</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BANNER JORNADA ============== -->
+<a href="https://aterym.com/2da-jornada-de-calidad/" class="banner-jornada" target="_blank" rel="noopener">
+  <div class="banner-jornada-grid">
+    <span class="badge-date"><span class="pulse"></span>15 y 16 · Mayo · 2026</span>
+    <div class="banner-jornada-text"><strong>2da Jornada Nacional de Calidad en Diálisis</strong> · Inscripciones abiertas</div>
+    <span class="banner-jornada-link">
+      <span>Ver más</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </span>
+  </div>
+</a>
+
+<!-- ============== BIENVENIDA ============== -->
+<section class="section" id="bienvenidos">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Institución</span>
+      <h2 class="section-title">Cuidamos a quienes <strong>confían en nosotros</strong>.</h2>
+    </div>
+    <div class="welcome-grid">
+      <div class="welcome-text">
+        <p class="quote">"Porque sabemos sobre el cuidado del paciente renal y estamos comprometidos en mejorar su calidad de vida, hacemos <em>nefrología y hemodiálisis jerarquizada</em>."</p>
+        <p>Aterym Alta Gracia es un centro de nefrología y hemodiálisis con más de una década de trayectoria en el cuidado del paciente renal. Trabajamos con un equipo interdisciplinario de profesionales especialistas en salud renal, comprometidos con cada persona y su bienestar integral.</p>
+        <p>Somos una institución acreditada en calidad y seguridad del paciente, lo que respalda nuestro modo de trabajo cotidiano: procesos verificados, mejora continua y atención centrada en las personas.</p>
+      </div>
+      <div class="welcome-images">
+        <img src="https://aterym.com/wp-content/uploads/2026/03/aterym-alta-gracia-1024x682.webp" alt="Instalaciones de Aterym Alta Gracia" loading="lazy">
+        <img src="https://aterym.com/wp-content/uploads/2026/03/Aterym-Alta-Gracia-14-1024x682.webp" alt="Equipo de Aterym Alta Gracia" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TRATAMIENTOS ============== -->
+<section class="section alt" id="tratamientos">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Tratamientos</span>
+      <h2 class="section-title">Opciones de <strong>tratamiento</strong>.</h2>
+      <p class="section-sub">Acompañamos a nuestros pacientes con dos modalidades de diálisis adaptadas a cada situación clínica y estilo de vida.</p>
+    </div>
+    <div class="treat-grid">
+      <a href="#contacto" class="treat-card">
+        <div class="treat-num">01</div>
+        <h3>Hemodiálisis</h3>
+        <p>Tratamiento ambulatorio en nuestro centro, con tecnología de última generación y monitoreo constante por parte de un equipo de profesionales especializados en salud renal.</p>
+        <span class="more">Más información →</span>
+      </a>
+      <a href="#contacto" class="treat-card">
+        <div class="treat-num">02</div>
+        <h3>Diálisis peritoneal</h3>
+        <p>Modalidad domiciliaria que permite mayor autonomía al paciente, con seguimiento profesional permanente y formación personalizada para cada caso particular.</p>
+        <span class="more">Más información →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ACREDITACIÓN ITAES ============== -->
+<section class="acred" id="calidad">
+  <div class="acred-grid">
+    <div>
+      <span class="acred-eyebrow">Calidad y seguridad del paciente</span>
+      <h2>Único centro de diálisis de Córdoba acreditado por <em>ITAES</em>.</h2>
+      <p>Estar acreditados por el Instituto Técnico para la Acreditación de Establecimientos de Salud significa que cumplimos con estándares nacionales e internacionales de calidad y seguridad del paciente, verificados por un organismo externo, independiente y especializado.</p>
+      <p>Trabajamos alineados a las metas internacionales de seguridad del paciente y avanzamos día a día para mantener y profundizar este reconocimiento.</p>
+      <a class="btn btn-ghost" href="#metas" style="margin-top:.5rem">
+        <span>Ver nuestras metas</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="acred-badge">
+      <img src="https://aterym.com/wp-content/uploads/2025/12/logo-itaes.png" alt="ITAES">
+      <div class="vigencia">Acreditación vigente</div>
+      <strong>2023 — 2026</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ============== METAS ============== -->
+<section class="section" id="metas">
+  <div class="section-inner wide">
+    <div class="section-header">
+      <span class="section-eyebrow">Nuestro trabajo</span>
+      <h2 class="section-title">Metas internacionales de <strong>seguridad del paciente</strong>.</h2>
+      <p class="section-sub">Seis pilares que guían las decisiones clínicas y los procesos cotidianos del equipo.</p>
+    </div>
+    <div class="metas-grid">
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span class="meta-num">Meta 01</span>
+        <h4>Identificar correctamente a los pacientes</h4>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <span class="meta-num">Meta 02</span>
+        <h4>Mejorar la comunicación efectiva</h4>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 14.5 4 21M14 7l-1.5 1.5M16.5 9.5 21 5"/><rect x="9" y="3" width="6" height="14" rx="3" transform="rotate(45 12 10)"/></svg></div>
+        <span class="meta-num">Meta 03</span>
+        <h4>Mejorar la seguridad de los medicamentos de alto riesgo</h4>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A5.2 5.2 0 0 1 12 5a5.2 5.2 0 0 1 8 5.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="2"/></svg></div>
+        <span class="meta-num">Meta 04</span>
+        <h4>Reducir el riesgo de daño al paciente por caídas</h4>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M9 15s1 2 3 2 3-2 3-2"/></svg></div>
+        <span class="meta-num">Meta 05</span>
+        <h4>Minimizar el riesgo de infecciones relacionadas a la atención</h4>
+      </article>
+      <article class="meta-card">
+        <div class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6M14 12h6M10 8v8M14 8v8"/></svg></div>
+        <span class="meta-num">Meta 06</span>
+        <h4>Evitar los errores de conexión de catéteres</h4>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EQUIPO ============== -->
+<section class="section alt" id="equipo">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Equipo</span>
+      <h2 class="section-title">Profesionales que trabajan <strong>en equipo</strong>.</h2>
+    </div>
+    <div class="team-intro">
+      <span class="number">+30</span>
+      <p>Profesionales especializados en salud renal, dedicados al cuidado integral de cada paciente.</p>
+    </div>
+    <div class="team-grid">
+      <article class="team-card">
+        <div class="team-photo"><img src="https://aterym.com/wp-content/uploads/2026/03/dr-boni.png" alt="Dr. Sergio Boni" loading="lazy"></div>
+        <div class="team-info">
+          <span class="role">Director Ejecutivo</span>
+          <h4>Dr. Sergio Boni</h4>
+        </div>
+      </article>
+      <article class="team-card">
+        <div class="team-photo"><img src="https://aterym.com/wp-content/uploads/2026/03/dra-nadaya.png" alt="Dra. Carolina Nadaya" loading="lazy"></div>
+        <div class="team-info">
+          <span class="role">Directora Médica</span>
+          <h4>Dra. Carolina Nadaya</h4>
+        </div>
+      </article>
+    </div>
+    <div class="team-cta">
+      <a class="btn btn-light" href="https://aterym.com/institucion/#equipo" target="_blank" rel="noopener">
+        <span>Conocer todo el equipo</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DIÁLISIS EN VACACIONES ============== -->
+<section class="vacaciones">
+  <div class="vacaciones-grid">
+    <div class="vacaciones-image">
+      <img src="https://aterym.com/wp-content/uploads/2026/03/DIALISIS-EN-VACACIONES-3-1024x665.jpg" alt="Diálisis en vacaciones · Sierras de Córdoba" loading="lazy">
+    </div>
+    <div class="vacaciones-content">
+      <span class="vacaciones-eyebrow">Programa especial</span>
+      <h2>Diálisis en vacaciones <strong>en las Sierras</strong></h2>
+      <p>Combiná tu tratamiento con un merecido descanso. Recibimos pacientes que viajan por las Sierras de Córdoba para que puedan continuar su tratamiento sin interrumpir el descanso. Reservá tu lugar con anticipación.</p>
+      <a class="btn btn-ghost" href="#contacto">
+        <span>Solicitar información</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== NOTICIAS ============== -->
+<section class="section" id="noticias">
+  <div class="section-inner wide">
+    <div class="section-header">
+      <span class="section-eyebrow">Novedades</span>
+      <h2 class="section-title">Últimas noticias y <strong>actividades</strong>.</h2>
+      <p class="section-sub">Lo que está pasando en Aterym Alta Gracia y en la comunidad que nos rodea.</p>
+    </div>
+    <div class="news-grid">
+      <a href="https://aterym.com/circuito-renal-2026-mas-de-500-vecinos-participaron-en-alta-gracia/" class="news-card" target="_blank" rel="noopener">
+        <div class="news-image"><img src="https://aterym.com/wp-content/uploads/elementor/thumbs/IMG_6582-scaled-rkqmzasdl4hcq51xvb5nqg3n5rhll9cspr6syv4es0.jpg" alt="Circuito Renal 2026" loading="lazy"></div>
+        <div class="news-body">
+          <span class="date">Día Mundial del Riñón</span>
+          <h3>Circuito Renal 2026: más de 500 vecinos participaron en Alta Gracia</h3>
+          <p>Por el Día Mundial del Riñón, Aterym realizó el Circuito Renal junto a ByB: participaron más de 500 vecinos en una campaña clave de prevención y detección temprana.</p>
+          <span class="news-link">
+            <span>Leer la nota</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="https://aterym.com/paseo-por-el-tajamar-atractivo-y-recorrido-natural-a-unos-pasos-del-centro-de-alta-gracia/" class="news-card" target="_blank" rel="noopener">
+        <div class="news-image"><img src="https://aterym.com/wp-content/uploads/elementor/thumbs/Tajamar-1-rfyhx89s15ioi5myjo5dtgihjtrgu5d1gmpd8ex974.jpg" alt="Paseo por el Tajamar" loading="lazy"></div>
+        <div class="news-body">
+          <span class="date">Alta Gracia</span>
+          <h3>Paseo por el Tajamar: naturaleza e historia en el centro</h3>
+          <p>El Tajamar, ícono histórico de Alta Gracia, combina paisaje, historia y recreación. Rodeado de naturaleza, es ideal para pasear y disfrutar al aire libre en pleno centro.</p>
+          <span class="news-link">
+            <span>Leer la nota</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA CONTACTO ============== -->
+<section class="cta-final" id="contacto">
+  <div class="section-inner">
+    <span class="section-eyebrow">Estamos para vos</span>
+    <h2 class="section-title">¿Necesitás <strong>contactarnos</strong>?</h2>
+    <p class="section-sub">Consultas, turnos o información sobre nuestros tratamientos. Escribinos o acercate a nuestras instalaciones en Alta Gracia.</p>
+    <div class="cta-final-actions">
+      <a class="btn btn-dark" href="mailto:info@aterym.com">
+        <span>Escribirnos</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-light" href="tel:+543515649322">
+        <span>351 564 9322</span>
+      </a>
+      <a class="btn btn-light" href="https://maps.google.com/?q=Brasil+151+Alta+Gracia" target="_blank" rel="noopener">
+        <span>Cómo llegar</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <img src="https://aterym.com/wp-content/uploads/2025/12/Logo-blanco-Aterym.webp" alt="Aterym Alta Gracia">
+        <p>Centro de nefrología y hemodiálisis en Alta Gracia, Córdoba. Institución acreditada en calidad y seguridad del paciente.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Institución</h4>
+        <ul>
+          <li><a href="https://aterym.com/calidad-y-seguridad-del-paciente/" target="_blank" rel="noopener">Calidad y seguridad</a></li>
+          <li><a href="https://aterym.com/institucion/" target="_blank" rel="noopener">Equipo de profesionales</a></li>
+          <li><a href="https://aterym.com/institucion/" target="_blank" rel="noopener">Instalaciones</a></li>
+          <li><a href="https://aterym.com/2da-jornada-de-calidad/" target="_blank" rel="noopener">2da Jornada de Calidad</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://maps.google.com/?q=Brasil+151+Alta+Gracia" target="_blank" rel="noopener">Brasil 151, Alta Gracia</a></li>
+          <li><a href="tel:+543547429304">3547 429 304</a></li>
+          <li><a href="tel:+543515649322">3515 649 322</a></li>
+          <li><a href="mailto:info@aterym.com">info@aterym.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Documentos</h4>
+        <ul>
+          <li><a href="https://aterym.com/wp-content/uploads/2026/03/aterym_codigo_de_etica_2021.pdf.pdf" target="_blank" rel="noopener">Código de Ética</a></li>
+          <li><a href="https://aterym.com/wp-content/uploads/2026/03/Derechos-y-Deberes-de-los-pacientes-Aterym-Alta-Gracia-1.pdf" target="_blank" rel="noopener">Derechos y deberes del paciente</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-itaes">
+      <img src="https://aterym.com/wp-content/uploads/2025/12/logo-itaes.png" alt="ITAES">
+      <p>Institución acreditada en calidad y seguridad del paciente</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Aterym Alta Gracia · Córdoba, Argentina</div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/aterymnefrologia" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/81579909/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.instagram.com/aterymnefrologia/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('visible')), {threshold:.1, rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.treat-card,.meta-card,.team-card,.news-card,.welcome-text,.welcome-images,.acred-badge').forEach(el => { el.classList.add('fade-in'); io.observe(el); });
+
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('mobile-show')));
+</script>
+</body>
+</html>
